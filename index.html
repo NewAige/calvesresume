@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chris Alves - Innovative Mortgage Professional</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --background: #f5f5f5;
+            --card-bg: #ffffff;
+            --highlight: #e1f5fe;
+            --text: #333333;
+            --border: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #003366);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .header-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .profile-name {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .contact-item i {
+            margin-right: 0.5rem;
+        }
+
+        .ai-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .ai-badge i {
+            margin-right: 0.5rem;
+        }
+
+        /* Navigation */
+        .nav-container {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.25rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Main content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Experience section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--border);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(30px);
+        }
+
+        .timeline-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary);
+            border: 4px solid var(--card-bg);
+            border-radius: 50%;
+            top: 20px;
+            right: -48px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -48px;
+            right: auto;
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .timeline-desc ul {
+            padding-left: 1.2rem;
+        }
+
+        .timeline-desc li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* AI Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .project-desc {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background-color: var(--highlight);
+            color: var(--primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Skills section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .skill-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-category-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .skill-desc {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .skill-progress {
+            height: 6px;
+            background-color: var(--border);
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #4c8dff);
+            border-radius: 3px;
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Education & Leadership */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .info-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .info-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .info-card-subtitle {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .info-card-date {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Call to action */
+        .cta-section {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-desc {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Job match section */
+        .job-match {
+            background-color: var(--highlight);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .job-match.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .job-match-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .job-title-section h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-company {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .job-requirements {
+            margin-top: 1.5rem;
+        }
+
+        .requirement-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .match-percentage-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .match-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0%, var(--primary) 0%, #e6e6e6 0%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .match-inner-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .match-percentage {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .match-text {
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .match-details {
+            text-align: center;
+            max-width: 300px;
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .profile-name {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .timeline::before {
+                left: 40px;
+            }
+
+            .timeline-item, .timeline-item:nth-child(even) {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 20px;
+                left: 0;
+            }
+
+            .timeline-content::after, .timeline-item:nth-child(even) .timeline-content::after {
+                left: -38px;
+                right: auto;
+            }
+
+            .job-match-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .match-percentage-container {
+                margin-top: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .typing-effect::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Particle animation for header */
+        #particles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: white;
+            opacity: 0.3;
+        }
+
+
+    </style>
+
+    <!-- Add these to the head section of your HTML, just before the closing </head> tag -->
+<!-- Google Material Symbols for Chat Icon -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=chat" />
+<style>
+    /* Material Icons Styling */
+    .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+    }
+
+    /* Chat Widget Styling - Matching your resume's design aesthetic */
+    .chat-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), #003366);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: transform 0.3s;
+    }
+
+    .chat-toggle:hover {
+        transform: scale(1.1);
+    }
+
+    .chat-toggle .material-symbols-outlined {
+        font-size: 28px;
+    }
+
+    .chat-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 350px;
+        height: 450px;
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        z-index: 1001;
+        overflow: hidden;
+        border-top: 4px solid var(--primary);
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    .chat-widget.expanded {
+        width: 450px; /* Wider when expanded */
+        height: 550px; /* Taller when expanded */
+    }
+
+    .chat-header {
+        background: linear-gradient(135deg, var(--primary), #003366);
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+    }
+
+    .chat-controls {
+        display: flex;
+        gap: 8px;
+    }
+
+    .chat-control-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+    }
+
+    .chat-control-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .chat-body {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-message {
+        max-width: 80%;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        border-radius: 18px;
+        line-height: 1.4;
+        word-wrap: break-word;
+    }
+
+    .chat-message.user {
+        align-self: flex-end;
+        background-color: var(--primary);
+        color: white;
+        border-bottom-right-radius: 5px;
+    }
+
+    .chat-message.bot {
+        align-self: flex-start;
+        background-color: var(--light);
+        color: var(--text);
+        border-bottom-left-radius: 5px;
+        white-space: pre-line; /* Preserves line breaks */
+        font-size: 0.95rem;
+    }
+
+    .chat-message.bot p {
+        margin: 5px 0 8px 0;
+        line-height: 1.5;
+    }
+
+    .chat-message.bot p:last-child {
+        margin-bottom: 0;
+    }
+
+    .chat-message.bot ul {
+        margin: 5px 0;
+        padding-left: 20px;
+    }
+
+    .chat-message.bot ul li {
+        margin-bottom: 6px;
+        list-style-type: disc;
+        position: relative;
+    }
+
+    .chat-message.bot h3 {
+        margin: 12px 0 8px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--primary);
+    }
+
+    .chat-message.bot strong, 
+    .chat-message.bot b {
+        font-weight: 600;
+        color: var(--primary);
+    }
+
+    /* Improved typing indicator */
+    .typing-indicator {
+        display: flex;
+        padding: 0.5rem;
+        gap: 0.3rem;
+        align-items: center;
+    }
+
+    .typing-indicator span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        animation: typing 1s infinite;
+    }
+
+    .typing-indicator span:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+
+    @keyframes typing {
+        0% { transform: translateY(0); background: rgba(0, 0, 0, 0.2); }
+        50% { transform: translateY(-5px); background: var(--primary); }
+        100% { transform: translateY(0); background: rgba(0, 0, 0, 0.2); }
+    }
+
+    .chat-input {
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid var(--border);
+    }
+
+    .chat-input input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        outline: none;
+        margin-right: 10px;
+        transition: border-color 0.3s;
+    }
+
+    .chat-input input:focus {
+        border-color: var(--primary);
+    }
+
+    .chat-input button {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+
+    .chat-input button:hover {
+        background-color: #004080;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <div id="particles-container"></div>
+        <div class="container header-container">
+            <h1 class="profile-name">Chris Alves</h1>
+            <p class="tagline typing-effect">Mortgage Operations & Technology Innovation Leader</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i>📍</i> 232 Sharp Street, Dartmouth, MA 02747
+                </div>
+                <div class="contact-item">
+                    <i>📱</i> (774) 218-9800
+                </div>
+                <div class="contact-item">
+                    <i>✉️</i> ChristopherMAlves@gmail.com
+                </div>
+            </div>
+            <div class="ai-badge">
+                <i>🤖</i> AI & Technology Innovation Expertise
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-container">
+        <nav class="container">
+            <ul>
+                <li><a href="#job-match" class="nav-link">Job Match</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#ai-projects" class="nav-link">AI Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#education" class="nav-link">Education and Leadership</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="container">
+        <section id="job-match" class="job-match">
+            <h2 class="section-title">Bridging Mortgage Expertise with AI Innovation</h2>
+                <div class="job-title-section">
+                    <div class="job-requirements">
+                        <div class="requirement-item">
+                            <span></span>
+                            <p>With over eight years of experience in mortgage operations, underwriting, and process optimization, I specialize in driving technological advancements in lending. As VP, Mortgage Operations and Sales Support Manager, I have led strategic initiatives, system enhancements, and regulatory compliance efforts, holding sign-off authority on residential mortgage loans up to $750,000. Beyond traditional underwriting, I have developed AI-driven applications that leverage automation and machine learning to enhance efficiency and decision-making. I believe AI is the most transformational technology of our time, and I am passionate about integrating it into financial services to drive innovation and improve underwriting effectiveness. <br><br> Chat with my AI assistant by clicking the chat bubble in the bottom right corner to learn more about me!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p class="timeline-date">July 2023 – Present</p>
+                        <h3 class="timeline-title">VP, Mortgage Operations & Sales Support Manager</h3>
+                        <h4>Bristol County Savings Bank</h4>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Lead mortgage operations and sales support teams, overseeing the entire loan origination lifecycle</li>
+                                <li>Spearhead strategic initiatives, including process improvements, regulatory compliance, and technology enhancements</li>
+                                <li>Manage underwriting, processing, and sales support functions</li>
+                                <li>Serve as Lead Encompass Administrator, managing system configurations, user access, and workflow automation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p class="timeline-date">April 2021 – July 2023</p>
+                        <h3 class="timeline-title">Mortgage Operations and Sales Support Manager</h3>
+                        <h4>Bristol County Savings Bank</h4>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Managed mortgage operations team, processing, and sales support functions</li>
+                                <li>Led the implementation of a new loan origination system</li>
+                                <li>Designed and deployed innovative solutions for Broker and TPO Wholesale lending channels</li>
+                                <li>Developed and implemented workflow improvements and technology adoption</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p class="timeline-date">January 2020 – April 2021</p>
+                        <h3 class="timeline-title">Mortgage Operations Supervisor</h3>
+                        <h4>Bristol County Savings Bank</h4>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Supervised day-to-day mortgage operations and processing workflows</li>
+                                <li>Led operational adaptations to accommodate CARES Act loan products</li>
+                                <li>Developed remote work infrastructure during pandemic</li>
+                                <li>Ensured regulatory compliance while maintaining operational efficiency</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p class="timeline-date">November 2017 – January 2020</p>
+                        <h3 class="timeline-title">Internal Sales Coordinator</h3>
+                        <h4>Bristol County Savings Bank</h4>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Coordinated between mortgage origination teams and operations</li>
+                                <li>Provided sales support and pipeline management</li>
+                                <li>Assisted with implementation of sales technology solutions</li>
+                                <li>Supported loan origination process and documentation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <p class="timeline-date">November 2016 – November 2017</p>
+                        <h3 class="timeline-title">Mortgage Consultant Trainee</h3>
+                        <h4>Bristol County Savings Bank</h4>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Learned all aspects of mortgage lending and operations</li>
+                                <li>Assisted with customer inquiries and loan application processing</li>
+                                <li>Developed understanding of underwriting guidelines and lending regulations</li>
+                                <li>Supported senior mortgage consultants and operations staff</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-projects" class="section">
+            <h2 class="section-title">AI & Technology Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">GutCheck Mobile App</h3>
+                    <p class="project-desc">Developed a dietary tracking app using Gemini's API for ingredient recognition and a Chain-of-Thought (CoT) model for in-depth analysis, demonstrating structured outputs.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Gemini API</span>
+                        <span class="tech-tag">Chain-of-Thought</span>
+                        <span class="tech-tag">Structured Output</span>
+                        <span class="tech-tag">Mobile App</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Pro-Home Chatbot</h3>
+                    <p class="project-desc">Built a chatbot providing information on Pro-Home's community services, enhancing communication and information accessibility for clients.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Conversational AI</span>
+                        <span class="tech-tag">Community Services</span>
+                        <span class="tech-tag">Information Systems</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Federal Home Loan Bank Chatbot</h3>
+                    <p class="project-desc">Created a Gemini-powered chatbot leveraging function calling and demonstrating agentic use of LLMs for financial services and information retrieval.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Gemini</span>
+                        <span class="tech-tag">Function Calling</span>
+                        <span class="tech-tag">Agentic LLMs</span>
+                        <span class="tech-tag">Financial Services</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Mortgage Technology & Innovation</h3>
+                    <p class="skill-desc">Experience with underwriting technology, process automation, and AI-driven solutions.</p>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-width="95"></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Leadership & Strategy</h3>
+                    <p class="skill-desc">Proven ability to drive change, lead cross-functional teams, and execute business transformation initiatives.</p>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Project & Process Optimization</h3>
+                    <p class="skill-desc">Workflow automation, Encompass configuration, and eClosing technology.</p>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-width="92"></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">AI</h3>
+                    <p class="skill-desc">Practical experience integrating LLMs, structured outputs, function calling, and CoT models.</p>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Regulatory Compliance & Risk Management</h3>
+                    <p class="skill-desc">Deep knowledge of underwriting guidelines, secondary markets, and lending regulations.</p>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-width="93"></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Software & Systems</h3>
+                    <p class="skill-desc">Encompass, AI/ML integrations, TPO Connect, financial modeling, and data analytics.</p>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" data-width="88"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section">
+            <h2 class="section-title">Education & Leadership</h2>
+            <div class="cards-container">
+                <div class="info-card">
+                    <h3 class="info-card-title">University of Massachusetts, Dartmouth</h3>
+                    <p class="info-card-subtitle">MBA & BS in Accounting</p>
+                    <p class="info-card-date">2012 - 2018</p>
+                    <p>Majors in Managemenet and Accounting</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="info-card-title">New England School of Financial Studies</h3>
+                    <p class="info-card-subtitle">MassBanker's Banking School</p>
+                    <p class="info-card-date">2022-2023</p>
+                    <p>Advanced financial services education focusing on leadership, risk management, and strategic planning in banking.</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="info-card-title">Board Member</h3>
+                    <p class="info-card-subtitle">Boys & Girls Clubs of MetroSouth</p>
+                    <p class="info-card-date">February 2022 – Present</p>
+                    <p>Contributing to youth development and community service initiatives.</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="info-card-title">Board Member</h3>
+                    <p class="info-card-subtitle">Pro-Home, Inc.</p>
+                    <p class="info-card-date">February 2025 – Present</p>
+                    <p>Supporting affordable housing initiatives and community development programs.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Drive Underwriting Innovation</h2>
+            <p class="cta-desc">I bring a unique combination of mortgage operations expertise, technology implementation experience, and AI innovation to help transform your underwriting processes.</p>
+            <a href="mailto:ChristopherMAlves@gmail.com" class="btn">Contact Me</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2025 Chris Alves | Mortgage Operations & Technology Innovation Leader</p>
+        </div>
+    </footer>
+
+    <script>
+        // Particles animation for header
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 2-6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                // Animation
+                particle.style.animation = `fadeIn ${Math.random() * 2 + 1}s ease-out infinite alternate`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Typing effect for tagline
+        function typeWriter(element, text, speed = 100) {
+            element.textContent = '';
+            element.classList.add('typing-effect');
+            
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    setTimeout(() => {
+                        element.classList.remove('typing-effect');
+                    }, 1000);
+                }
+            }
+            
+            type();
+        }
+        
+        // Intersection Observer for scroll animations
+        function setupIntersectionObserver() {
+            const sections = document.querySelectorAll('.section, .job-match');
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const projectCards = document.querySelectorAll('.project-card');
+            const skillCategories = document.querySelectorAll('.skill-category');
+            const infoCards = document.querySelectorAll('.info-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            sections.forEach(section => observer.observe(section));
+            timelineItems.forEach(item => observer.observe(item));
+            projectCards.forEach(card => observer.observe(card));
+            skillCategories.forEach(category => observer.observe(category));
+            infoCards.forEach(card => observer.observe(card));
+        }
+        
+        // Animate skill progress bars
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress-bar');
+            
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = `${width}%`;
+                }, 300);
+            });
+        }
+        
+        // Animate match percentage
+        function animateMatchPercentage() {
+            const matchPercentage = document.getElementById('match-percentage');
+            const matchCircle = document.getElementById('match-circle');
+            const targetPercentage = 96;
+            let currentPercentage = 0;
+            
+            const interval = setInterval(() => {
+                if (currentPercentage >= targetPercentage) {
+                    clearInterval(interval);
+                } else {
+                    currentPercentage++;
+                    matchPercentage.textContent = `${currentPercentage}%`;
+                    matchCircle.style.background = `conic-gradient(var(--primary) 0%, var(--primary) ${currentPercentage * 3.6}deg, #e6e6e6 ${currentPercentage * 3.6}deg)`;
+                }
+            }, 20);
+        }
+        
+        // Navigation active state
+        function setupNavigation() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    if (window.pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        }
+        
+        // Initialize all features
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            const tagline = document.querySelector('.tagline');
+            const taglineText = "Mortgage Operations & Technology Innovation Leader";
+            typeWriter(tagline, taglineText, 80);
+            
+            setupIntersectionObserver();
+            animateSkillBars();
+            setupNavigation();
+            
+            // Delay match percentage animation
+            setTimeout(animateMatchPercentage, 1000);
+            
+            // GSAP ScrollTrigger animations
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Timeline animation
+            gsap.from('.timeline::before', {
+                height: 0,
+                duration: 1.5,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.timeline',
+                    start: 'top 80%'
+                }
+            });
+        });
+    </script>
+<!-- Chat Widget HTML -->
+<!-- Chat Toggle Button (using the Google chat icon) -->
+<!-- Chat Toggle Button (using the Google chat icon) -->
+<button id="chat-toggle" class="chat-toggle">
+    <span class="material-symbols-outlined">chat</span>
+</button>
+
+<!-- Chat Widget Container -->
+<div id="chat-widget" class="chat-widget">
+    <div class="chat-header">
+        <span>Chat with Chris's AI Assistant</span>
+        <div class="chat-controls">
+            <button id="chat-expand" class="chat-control-btn" title="Expand chat">⤢</button>
+            <button id="chat-close" class="chat-control-btn" title="Close chat">×</button>
+        </div>
+    </div>
+    <div id="chat-body" class="chat-body">
+        <!-- Chat messages will be appended here -->
+    </div>
+    <div class="chat-input">
+        <input type="text" id="chat-message" placeholder="Type your message..." />
+        <button id="chat-send">Send</button>
+    </div>
+</div>
+
+<!-- Chat Script -->
+<script>
+// Select DOM elements 
+const chatToggle = document.getElementById('chat-toggle');
+const chatWidget = document.getElementById('chat-widget');
+const chatClose = document.getElementById('chat-close');
+const chatExpand = document.getElementById('chat-expand');
+const chatBody = document.getElementById('chat-body');
+const chatSend = document.getElementById('chat-send');
+const chatMessageInput = document.getElementById('chat-message');
+
+// Global conversation history to track the dialogue
+let conversationHistory = [];
+
+/**
+ * Enhanced formatMessage converts plain text into HTML with bullet points and headers.
+ * Handles various formatting styles including:
+ * - Lines starting with "* " or "- " become list items
+ * - ALL CAPS: headers
+ * - **bold** text
+ * - *italic* text
+ * - Headers with colons
+ * - Better paragraph spacing
+ */
+function formatMessage(text) {
+  // First, handle the markdown-style formatting
+  text = text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Bold text
+    .replace(/\*(.*?)\*/g, '<em>$1</em>');            // Italic text
+
+  const lines = text.split('\n');
+  let formatted = '';
+  let inList = false;
+
+  lines.forEach(line => {
+    const trimmed = line.trim();
+    
+    // Check for header lines (EXPERIENCE:, SKILLS:, etc.)
+    if (trimmed.match(/^[A-Z][A-Z\s]+:$/)) {
+      if (inList) {
+        formatted += '</ul>';
+        inList = false;
+      }
+      formatted += `<h3>${trimmed}</h3>`;
+      return;
+    }
+    
+    // Regular header format
+    if (trimmed.startsWith('**') && trimmed.includes('**:')) {
+      if (inList) {
+        formatted += '</ul>';
+        inList = false;
+      }
+      const headerMatch = trimmed.match(/^\*\*(.+?)\*\*:\s*(.*)/);
+      if (headerMatch) {
+        const headerText = headerMatch[1].trim();
+        const remainder = headerMatch[2].trim();
+        formatted += `<h3>${headerText}</h3>`;
+        if (remainder) {
+          formatted += `<p>${remainder}</p>`;
+        }
+        return;
+      }
+    }
+    
+    // Check for bullet list items - support both * and - as bullets
+    if (trimmed.startsWith('* ') || trimmed.startsWith('- ')) {
+      if (!inList) {
+        formatted += '<ul>';
+        inList = true;
+      }
+      formatted += `<li>${trimmed.substring(2)}</li>`;
+    } else {
+      // Close list if we're in one
+      if (inList) {
+        formatted += '</ul>';
+        inList = false;
+      }
+      // Wrap non-empty lines in paragraph tags
+      if (trimmed) {
+        formatted += `<p>${trimmed}</p>`;
+      } else if (formatted && !formatted.endsWith('<p></p>')) {
+        // Add spacing between paragraphs
+        formatted += '<p></p>';
+      }
+    }
+  });
+  
+  if (inList) {
+    formatted += '</ul>';
+  }
+  
+  return formatted;
+}
+
+/**
+ * Creates an enhanced typing indicator with animated dots
+ */
+function createTypingIndicator() {
+  const typingIndicator = document.createElement('div');
+  typingIndicator.className = 'chat-message bot typing-indicator';
+  typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+  return typingIndicator;
+}
+
+/**
+ * Toggles the chat size between normal and expanded
+ */
+function toggleChatSize() {
+  chatWidget.classList.toggle('expanded');
+  
+  if (chatWidget.classList.contains('expanded')) {
+    chatExpand.innerHTML = '⤓'; // Unicode contract symbol
+    chatExpand.title = 'Contract chat';
+  } else {
+    chatExpand.innerHTML = '⤢'; // Unicode expand symbol
+    chatExpand.title = 'Expand chat';
+  }
+}
+
+// Helper: Append a message to the chat body.
+// For bot messages, use innerHTML to render formatted HTML.
+// For user messages, use textContent.
+function appendMessage(sender, text) {
+  const msgElem = document.createElement('div');
+  msgElem.className = `chat-message ${sender}`;
+  if (sender === 'bot') {
+    msgElem.innerHTML = formatMessage(text);
+  } else {
+    msgElem.textContent = text;
+  }
+  chatBody.appendChild(msgElem);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Toggle the chat widget visibility
+chatToggle.addEventListener('click', () => {
+  chatWidget.style.display = 'flex';
+  chatToggle.style.display = 'none';
+  
+  // Add a welcome message if the chat is empty
+  if (chatBody.childElementCount === 0) {
+    const welcomeMessage = "Hi, I'm Chris's digital assistant. I can tell you about Chris's experience in mortgage operations, technology innovation, AI projects, and his qualifications for the Senior Manager role at Enact Mortgage Insurance. How can I help you today?";
+    appendMessage('bot', welcomeMessage);
+    conversationHistory.push({ sender: 'bot', text: welcomeMessage });
+  }
+});
+
+// Close chat
+chatClose.addEventListener('click', () => {
+  chatWidget.style.display = 'none';
+  chatToggle.style.display = 'block';
+});
+
+// Toggle chat size
+chatExpand.addEventListener('click', toggleChatSize);
+
+// Send a message using the streaming endpoint
+function sendMessage() {
+  const message = chatMessageInput.value.trim();
+  if (!message) return;
+  
+  // Display the user's message and update conversation history
+  appendMessage('user', message);
+  conversationHistory.push({ sender: 'user', text: message });
+  chatMessageInput.value = '';
+  
+  // Create typing indicator
+  const typingIndicator = createTypingIndicator();
+  chatBody.appendChild(typingIndicator);
+  chatBody.scrollTop = chatBody.scrollHeight;
+  
+  // Create a message container for the streaming response
+  const streamMsgElem = document.createElement('div');
+  streamMsgElem.className = 'chat-message bot';
+  streamMsgElem.style.display = 'none'; // Hide until we start receiving content
+  
+  // Make a request to the streaming endpoint
+  fetch('https://resume-chat-1092979417464.us-central1.run.app/stream', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat: message,
+      history: conversationHistory
+    })
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Server response was not OK');
+    }
+    
+    // Set up a reader for the stream
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let botResponse = "";
+    let isFirstChunk = true;
+    
+    function read() {
+      reader.read().then(({ done, value }) => {
+        if (done) {
+          // Remove typing indicator once streaming is complete
+          if (typingIndicator.parentNode) {
+            chatBody.removeChild(typingIndicator);
+          }
+          
+          // If we never got any content, show the message now
+          if (isFirstChunk) {
+            chatBody.appendChild(streamMsgElem);
+            streamMsgElem.style.display = 'block';
+            streamMsgElem.innerHTML = formatMessage(botResponse);
+          }
+          
+          // Update conversation history with final response
+          conversationHistory.push({ sender: 'bot', text: botResponse });
+          return;
+        }
+        
+        // Decode the chunk
+        const chunk = decoder.decode(value, { stream: true });
+        botResponse += chunk;
+        
+        // If this is the first chunk with actual content, show the message container
+        if (isFirstChunk && chunk.trim().length > 0) {
+          // Remove typing indicator once we start receiving content
+          if (typingIndicator.parentNode) {
+            chatBody.removeChild(typingIndicator);
+          }
+          
+          // Show the message container
+          streamMsgElem.style.display = 'block';
+          chatBody.appendChild(streamMsgElem);
+          isFirstChunk = false;
+        }
+        
+        // Update the displayed message with new content
+        if (!isFirstChunk) {
+          streamMsgElem.innerHTML = formatMessage(botResponse);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        
+        // Continue reading
+        read();
+      }).catch(err => {
+        console.error("Error reading stream:", err);
+        if (typingIndicator.parentNode) {
+          chatBody.removeChild(typingIndicator);
+        }
+        
+        const fallbackResponse = "I'm sorry, I couldn't process your request. Please try again later or reach out to Chris directly at ChristopherMAlves@gmail.com.";
+        appendMessage('bot', fallbackResponse);
+        conversationHistory.push({ sender: 'bot', text: fallbackResponse });
+      });
+    }
+    
+    // Start reading the stream
+    read();
+  })
+  .catch(err => {
+    console.error('Error connecting to server:', err);
+    
+    // Remove typing indicator
+    if (typingIndicator.parentNode) {
+      chatBody.removeChild(typingIndicator);
+    }
+    
+    // Fallback response for when the API is not available
+    const fallbackResponse = "I'm sorry, I'm currently unable to connect to my knowledge base. Please try again later or reach out to Chris directly at ChristopherMAlves@gmail.com.";
+    appendMessage('bot', fallbackResponse);
+    conversationHistory.push({ sender: 'bot', text: fallbackResponse });
+  });
+}
+
+// Attach event listeners for sending messages
+chatSend.addEventListener('click', sendMessage);
+chatMessageInput.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    sendMessage();
+  }
+});
+</script>
+
+
+</body>
+</html>
